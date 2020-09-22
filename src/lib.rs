@@ -16,13 +16,9 @@ pub mod compositor;
 pub mod property;
 pub mod render_models;
 pub mod system;
+pub mod interop;
 
 pub use tracking::*;
-
-pub use sys::VkDevice_T;
-pub use sys::VkInstance_T;
-pub use sys::VkPhysicalDevice_T;
-pub use sys::VkQueue_T;
 
 static INITIALIZED: AtomicBool = AtomicBool::new(false);
 
@@ -112,7 +108,7 @@ impl Context {
     /// attempting to free graphics resources.
     ///
     /// No calls to other OpenVR methods may be made after this has been called unless a new `Context` is first
-   
+
     /// constructed.
     pub unsafe fn shutdown(&self) {
         if self.live.swap(false, Ordering::Acquire) {
